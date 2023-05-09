@@ -2,7 +2,7 @@
 
 Inside table:
 - Enemy No Aggro
-- Walking Speed
+- Movement Speed
 - Force Auto Battle
 - Battle Speed
 - Dialog/Scene/World Speed
