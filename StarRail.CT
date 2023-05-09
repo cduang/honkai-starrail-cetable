@@ -27,57 +27,6 @@ dealloc(resnoaggro)
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
-      <ID>3</ID>
-      <Description>"Walking Speed"</Description>
-      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>{  Game Executable   : StarRail.exe
-   Script Date       : 2023-04-29
-   Author            : Sianz
-}
-
-[ENABLE]
-aobscanmodule(aowalkspeed,GameAssembly.dll,F3 0F 10 83 84 01 00 00 48 83 C4 20 5B C3 33 D2 B9 DB)
-alloc(nwalkspeed,$1000,aowalkspeed)
-label(rwalkspeed)
-label(reswalkspeed)
-label(lwalkspeed)
-nwalkspeed:
-mov [lwalkspeed],rbx
-reswalkspeed:
-readmem(aowalkspeed,8)
-jmp rwalkspeed
-lwalkspeed:
-dq 0
-aowalkspeed:
-jmp nwalkspeed
-nop 3
-rwalkspeed:
-registersymbol(aowalkspeed)
-registersymbol(reswalkspeed)
-registersymbol(lwalkspeed)
-[DISABLE]
-aowalkspeed:
-readmem(reswalkspeed,8)
-unregistersymbol(aowalkspeed)
-unregistersymbol(reswalkspeed)
-unregistersymbol(lwalkspeed)
-dealloc(nwalkspeed)
-</AssemblerScript>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>4</ID>
-          <Description>"edit the value and freeze it,"</Description>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>Float</VariableType>
-          <Address>lwalkspeed</Address>
-          <Offsets>
-            <Offset>184</Offset>
-          </Offsets>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
       <ID>1</ID>
       <Description>"Force Auto Battle"</Description>
       <VariableType>Auto Assembler Script</VariableType>
@@ -105,7 +54,7 @@ dealloc(resautobattle)
     <CheatEntry>
       <ID>5</ID>
       <Description>"Battle Speed"</Description>
-      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <Options moAlwaysHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{  Game Executable   : StarRail.exe
    Script Date       : 2023-04-27
@@ -147,7 +96,7 @@ dealloc(nbattlespeed)
       <CheatEntries>
         <CheatEntry>
           <ID>6</ID>
-          <Description>"F7 to toggle speed."</Description>
+          <Description>"4x"</Description>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 lbattlespeed:
@@ -157,15 +106,87 @@ db 0
 lbattlespeed:
 db 1
 </AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Movement Speed"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{  Game Executable   : StarRail.exe
+   Script Date       : 2023-04-29
+   Author            : Sianz
+}
+
+[ENABLE]
+aobscanmodule(aowalkspeed,GameAssembly.dll,F3 0F 10 83 84 01 00 00 48 83 C4 20 5B C3 33 D2 B9 DB)
+alloc(nwalkspeed,$1000,aowalkspeed)
+label(rwalkspeed)
+label(reswalkspeed)
+label(lwalkspeed)
+nwalkspeed:
+mov [lwalkspeed],rbx
+reswalkspeed:
+readmem(aowalkspeed,8)
+jmp rwalkspeed
+lwalkspeed:
+dq 0
+aowalkspeed:
+jmp nwalkspeed
+nop 3
+rwalkspeed:
+registersymbol(aowalkspeed)
+registersymbol(reswalkspeed)
+registersymbol(lwalkspeed)
+[DISABLE]
+aowalkspeed:
+readmem(reswalkspeed,8)
+unregistersymbol(aowalkspeed)
+unregistersymbol(reswalkspeed)
+unregistersymbol(lwalkspeed)
+dealloc(nwalkspeed)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"Sprinting"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>lwalkspeed</Address>
+          <Offsets>
+            <Offset>184</Offset>
+          </Offsets>
           <Hotkeys>
             <Hotkey>
-              <Action>Toggle Activation</Action>
+              <Action>Set Value</Action>
               <Keys>
-                <Key>118</Key>
+                <Key>114</Key>
               </Keys>
+              <Value>2</Value>
               <ID>0</ID>
               <ActivateSound>Activate</ActivateSound>
-              <DeactivateSound>Deactivate</DeactivateSound>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9304</ID>
+          <Description>"Walking"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>lwalkspeed</Address>
+          <Offsets>
+            <Offset>17C</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>114</Key>
+              </Keys>
+              <Value>2</Value>
+              <ID>0</ID>
+              <ActivateSound>Activate</ActivateSound>
             </Hotkey>
           </Hotkeys>
         </CheatEntry>
@@ -174,7 +195,7 @@ db 1
     <CheatEntry>
       <ID>7</ID>
       <Description>"Dialog/Scene/World Speed"</Description>
-      <Options moHideChildren="1"/>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{  Game Executable   : StarRail.exe
    Script Date       : 2023-05-02
@@ -188,7 +209,7 @@ label(rglobalspeed)
 label(resglobalspeed)
 label(lglobalspeed)
 nglobalspeed:
-mov [rax+000000FC],(float)10
+mov [rax+000000FC],(float)5
 cmp byte ptr [lglobalspeed],1
 jne resglobalspeed
 mov [rax+000000FC],(float)1
@@ -216,7 +237,7 @@ dealloc(nglobalspeed)
       <CheatEntries>
         <CheatEntry>
           <ID>8</ID>
-          <Description>"F8 to toggle speed."</Description>
+          <Description>"F8 hotkey to on/off speed"</Description>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 lglobalspeed:
