@@ -443,8 +443,58 @@ dealloc(nplayerxyz)
           <VariableType>Float</VariableType>
           <Address>lplayerxyz</Address>
           <Offsets>
-            <Offset>14</Offset>
+            <Offset>C</Offset>
           </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>105291</ID>
+          <Description>"Teleport Location Saver"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$lua}
+if syntaxcheck then return end
+[ENABLE]
+local script = {}
+table.insert(script, "{$lua}")
+table.insert(script, "[ENABLE]")
+table.insert(script, "")
+XCoord = "[lplayerxyz]+10"
+YCoord = "[lplayerxyz]+18"
+ZCoord = "[lplayerxyz]+C"
+ X = "writeFloat('"..XCoord.."',"..(readFloat(""..XCoord.."")..") -- X Coord")
+table.insert(script, X)
+ Y = "writeFloat('"..YCoord.."',"..(readFloat(""..YCoord.."")..") -- Y Coord")
+table.insert(script, Y)
+ Z = "writeFloat('"..ZCoord.."',"..(readFloat(""..ZCoord.."")..") -- Z Coord")
+table.insert(script, Z)
+table.insert(script, "")
+table.insert(script, [[if not syntaxcheck then
+ synchronize(function()
+   local t = createTimer()
+   t.Interval,t.OnTimer = 500,function(tm)
+     tm.Destroy()
+     memrec.Active = false
+   end
+ end)
+end]])
+table.insert(script, "")
+table.insert(script, "[DISABLE]")
+MRLoc = AddressList.getMemoryRecordByDescription('Teleport Location Saver')
+local mr = AddressList.createMemoryRecord()
+mr.Type = vtAutoAssembler
+mr.appendToEntry(MRLoc)
+mr.Description = 'Teleport to: '
+mr.Script = table.concat(script, '\n')
+if not syntaxcheck then
+ synchronize(function()
+   local t = createTimer()
+   t.Interval,t.OnTimer = 500,function(tm)
+     tm.Destroy()
+     memrec.Active = false
+   end
+ end)
+end
+[DISABLE]
+</AssemblerScript>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
